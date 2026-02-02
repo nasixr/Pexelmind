@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pexel Mind - بصيرتك في التصميم</title>
+    
+    <!-- Favicon: Pexel Mind Split Brain Logo -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M48 20 C48 12 40 10 36 12 C34 6 22 8 20 16 C12 16 8 24 10 32 C4 36 4 50 12 58 C12 68 20 78 36 78 C42 78 48 72 48 68 V20 Z' fill='%230F172A'/%3E%3Cpath d='M52 20 C52 12 60 10 64 12 C66 6 78 8 80 16 C88 16 92 24 90 32 C96 36 96 50 88 58 C88 68 80 78 64 78 C58 78 52 72 52 68 V20 Z' stroke='%230F172A' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='58' cy='30' r='4' fill='%230F172A'/%3E%3Cpath d='M58 30 L72 22' stroke='%230F172A' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='72' cy='22' r='4' fill='%230F172A'/%3E%3Ccircle cx='60' cy='48' r='4' fill='%230F172A'/%3E%3Cpath d='M60 48 H76' stroke='%230F172A' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='76' cy='48' r='4' fill='%230F172A'/%3E%3Ccircle cx='58' cy='66' r='4' fill='%230F172A'/%3E%3Cpath d='M58 66 L70 74' stroke='%230F172A' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='70' cy='74' r='4' fill='%230F172A'/%3E%3C/svg%3E">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Tajawal', 'sans-serif'],
+            },
+            colors: {
+              primary: {
+                900: '#0F172A', // Deep Blue
+                800: '#1E293B',
+                50:  '#F0F9FF',
+              },
+              accent: {
+                500: '#15803D', // Green
+                600: '#166534',
+              },
+              background: {
+                50: '#F8FAFC',
+              }
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-out',
+              'slide-up': 'slideUp 0.6s ease-out forwards',
+              'float': 'float 6s ease-in-out infinite',
+              'float-delayed': 'float 6s ease-in-out 3s infinite',
+              'scan': 'scan 2s linear infinite',
+              'spin-slow': 'spin 12s linear infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+              scan: {
+                '0%': { top: '0%' },
+                '50%': { top: '100%' },
+                '100%': { top: '0%' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* 3D Utilities & Dynamic Motion */
+      .perspective-1000 {
+        perspective: 1000px;
+        transform-style: preserve-3d;
+      }
+      
+      /* Enhanced Perspective Class with Mouse Interaction */
+      .perspective-2000 {
+        perspective: 2000px;
+        transform-style: preserve-3d;
+        /* Dynamic rotation and slight translation based on mouse position variables */
+        transform: 
+          rotateX(calc(var(--mouse-y, 0) * 1.5deg)) 
+          rotateY(calc(var(--mouse-x, 0) * -1.5deg))
+          translateX(calc(var(--mouse-x, 0) * -8px))
+          translateY(calc(var(--mouse-y, 0) * -8px));
+        /* Smooth transition for fluid movement */
+        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        will-change: transform;
+      }
+
+      .transform-style-3d {
+        transform-style: preserve-3d;
+      }
+      .backface-hidden {
+        backface-visibility: hidden;
+      }
+      .rotate-y-12 {
+        transform: rotateY(12deg);
+      }
+      .rotate-x-12 {
+        transform: rotateX(12deg);
+      }
+      .translate-z-10 {
+        transform: translateZ(20px);
+      }
+      .translate-z-20 {
+        transform: translateZ(40px);
+      }
+      .translate-z-30 {
+        transform: translateZ(60px);
+      }
+      
+      /* Parallax & Interaction */
+      .animate-parallax {
+        /* Using CSS variables set by JS */
+        transform: rotateX(calc(var(--mouse-y, 0) * 8deg)) rotateY(calc(var(--mouse-x, 0) * 8deg));
+        transition: transform 0.2s ease-out;
+      }
+      
+      .animate-parallax-reverse {
+        transform: rotateX(calc(var(--mouse-y, 0) * -4deg)) rotateY(calc(var(--mouse-x, 0) * -4deg));
+        transition: transform 0.2s ease-out;
+      }
+
+      /* Smooth Hover Effects */
+      .hover-lift-3d {
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .hover-lift-3d:hover {
+        transform: translateY(-10px) rotateX(4deg) scale(1.02);
+        box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.1), 0 15px 15px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      /* Accessibility Focus Styles */
+      *:focus-visible {
+        outline: 4px solid #FACC15;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+      body {
+        background-color: #F8FAFC;
+        color: #0F172A;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.39.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
